@@ -1,0 +1,112 @@
+Ports to gmod/ttt and/or de/recompiling:
+Steyr TMP		- NinjaTuna
+Benelli M3		- NinjaTuna
+SIG 550 		- NinjaTuna
+AK-47			- NinjaTuna
+FAMAS F1		- EraYaN
+Death Station	- EraYaN
+AWM 			- EraYaN
+Ammo			- NinjaTuna
+Rearms		- EraYaN & NinjaTuna & Others
+Setup			- EraYaN
+AN-94			- NinjaTuna
+M24			 - NinjaTuna
+PP-2000      - NinjaTuna
+SPAS-12      - NinjaTuna
+Katana       - EraYaN
+Raging Bull  - EraYaN
+Soundscripts - NinjaTuna
+Recompiling  - EraYaN & NinjaTuna
+
+
+Cooperation 	- NinjaTuna & EraYaN
+
+#######################################################
+@ ORIGINAL BASESCRIPT BY TETA BONITA (realistic guns) @
+#######################################################
+
+AN-94
+Key Authors
+
+    * Junkie_Bastard[RuS] - Animations\Compile
+
+Original Authors
+
+    * twinke masta\TheLama\Malignant - Model
+    * Millenia\Pete\Rosa Jonas - Textures
+http://www.gamebanana.com/skins/99262
+##############################################
+
+F2000
+    Key Authors
+    
+      * The_Lama
+      * Acid_Snake
+      * Vunsunta
+      * Unbreakble
+      * StrykerWolf
+      * Ankalar
+
+##############################################
+
+M24
+    Key Authors
+
+        * Vunsunta - Sounds
+        * Iflip - Sounds
+        * Smith - VGUI
+        * TheStealthyOne - Normal Map
+        * SixShooter - Textures
+        * !NC!Furious - Textures
+        * Murdock - Textures & Model
+        * Chumpchange - Model
+        * Endorphin - Model
+        * Kais - Model
+        * Bullethead - Model
+        * IIopn - Animation & Compile
+##############################################
+
+SPAS-12
+   Key Authors
+
+        Model by Lamarr
+    	Skin by Diwako
+    	Animations by Jennifer!! and Valve
+    	Sounds by Unknown
+    	Compiles and Buy Menu Pics by modderfreak
+#############################################
+
+PP-2000
+Key Authors
+
+    DeadPixel - model
+    Kimono - PBS-1 Silencer(Model)
+    Jason9Jason - PBS-1 Silencer(Texture)
+    Rionname - PP-2000 texture
+    Strelok - Sounds
+    Junkie_Bastard[RuS] - previous compile
+    SpiceMustFlow - kung-fu
+    Blind5 - animations
+    Max(R) - video/render
+#############################################
+
+SCAR-L
+Key Authors
+
+	Shortez - Animations & compile & EOTECH texture
+	End of Days - Model
+	Racer445 - textures
+	b0t - uv's
+	Milo - uv's edits
+	Mr. Brightside - tan texture edits
+	Antman - normalmaps
+	Strelok - sounds
+	William Brutality - sleeves model
+	HappyCamper - sleeves textures
+	Hellspike - Anpeq model
+	EMDG - Anpeq texture
+	TheLama - Eotech model
+#############################################
+
+
+

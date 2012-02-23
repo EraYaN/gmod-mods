@@ -1,0 +1,11 @@
+VertexLitGeneric
+{
+	"$basetexture"	"models\weapons\v_models\v_rif_scarl\eotech"
+	"$bumpmap" "models\weapons\v_models\v_rif_scarl\eotech_Normal"
+	"$normalmapalphaenvmapmask" "1"
+	"$phong" 		"1"
+	"$phongexponent" 	"25"
+	"$phongboost" "0.85"
+	"$phongfresnelranges" "[1 2.5 5]"
+     	"$phongalbedotint" "1"
+}

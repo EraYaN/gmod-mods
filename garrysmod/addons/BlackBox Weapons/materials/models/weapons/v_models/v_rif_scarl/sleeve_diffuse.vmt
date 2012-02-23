@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	"$baseTexture" "models\weapons\v_models\v_rif_scarl\sleeve_diffuse"
+	"$translucent"	"1"
+
+}

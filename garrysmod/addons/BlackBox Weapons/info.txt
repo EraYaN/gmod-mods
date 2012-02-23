@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+	"name"			"BlackBox Weapons"
+	"version"		"0.1"
+	"up_date"		"2012"
+	"author_name"		"BlackBox"
+	"author_email"		""
+	"author_url"		"http://blackbox.erayan.eu"
+	"info"			"Weapons Pack used and created by BlackBox - a Black Mesa Research Facility Division"
+	"override"		"0"
+}
