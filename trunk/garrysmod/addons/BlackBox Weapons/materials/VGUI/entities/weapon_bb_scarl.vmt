@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture" "VGUI/entities/weapon_bb_scarl"
+	"$vertexalpha" 1
+	"$vertexcolor" 1
+}

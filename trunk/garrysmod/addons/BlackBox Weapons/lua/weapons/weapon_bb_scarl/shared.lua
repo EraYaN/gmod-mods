@@ -46,7 +46,7 @@ SWEP.AutoSwitchFrom		= false
 -- Primary Fire --
 ----------------------
 SWEP.Primary.Sound			= Sound("weapons/scarl/scarl-1.wav")
-SWEP.Primary.Silenced		= Sound("weapons/m4a1/m4a1-1.wav")
+SWEP.Primary.Silenced		= Sound("weapons/scarl/scarl-1_silenced.wav")
 SWEP.Primary.Damage			= 20 -- This determines both the damage dealt and force applied by the bullet.
 SWEP.Primary.NumShots		= 1
 SWEP.Primary.ClipSize		= 30
@@ -109,7 +109,7 @@ SWEP.WorldModel 			= "models/weapons/w_rif_scarl.mdl"
 SWEP.MuzzleEffect			= "rg_muzzle_rifle" -- This is an extra muzzleflash effect
 -- Available muzzle effects: rg_muzzle_grenade, rg_muzzle_highcal, rg_muzzle_hmg, rg_muzzle_pistol, rg_muzzle_rifle, rg_muzzle_silenced, none
 
-SWEP.ShellEffect			= "rg_shelleject_rifle" -- This is a shell ejection effect
+SWEP.ShellEffect			= "none" -- This is a shell ejection effect
 -- Available shell eject effects: rg_shelleject, rg_shelleject_rifle, rg_shelleject_shotgun, none
 
 SWEP.MuzzleAttachment		= "1" -- Should be "1" for CSS models or "muzzle" for hl2 models
