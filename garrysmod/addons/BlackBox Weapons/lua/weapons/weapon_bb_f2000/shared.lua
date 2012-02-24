@@ -18,8 +18,8 @@ if CLIENT then
 		
 	SWEP.Slot				= 2
 	SWEP.SlotPos			= 1
-	SWEP.WepSelectIcon		= surface.GetTextureID( "VGUI/entities/weapon_bb_f2000_killicon" )
-	killicon.Add("weapon_bb_f2000" ,"VGUI/entities/weapon_bb_f2000_killicon" ,Color(255, 80, 0, 255))
+	SWEP.WepSelectIcon		= surface.GetTextureID( "VGUI/entities/weapon_bb_f2000_icon" )
+	killicon.Add("weapon_bb_f2000" ,"VGUI/entities/weapon_bb_f2000_icon" ,Color(255, 80, 0, 255))
 	
 end
 

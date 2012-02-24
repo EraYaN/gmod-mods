@@ -532,23 +532,34 @@ function SWEP:ShootEffects()
 	local PlayerPos = self.Owner:GetShootPos()
 	local PlayerAim = self.Owner:GetAimVector()
 
-	self.Weapon:EmitSound(self.Primary.Sound)
-	self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK) 		-- View model animation
-	self.Owner:MuzzleFlash()								-- Crappy muzzle light
+	if Silenced then
+		self.Weapon:EmitSound(self.Primary.Silenced)
+		self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK_SILENCED)
+	else
+		self.Weapon:EmitSound(self.Primary.Sound)
+		self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
+		self.Owner:MuzzleFlash()
+	end
+	
 	self.Owner:SetAnimation(PLAYER_ATTACK1)					-- 3rd Person Animation
 	
 	local fx = EffectData()
 	fx:SetEntity(self.Weapon)
 	fx:SetOrigin(PlayerPos)
 	fx:SetNormal(PlayerAim)
-	fx:SetAttachment(self.MuzzleAttachment)
-	util.Effect(self.MuzzleEffect,fx)						-- Additional muzzle effects
+	fx:SetAttachment(self.MuzzleAttachment)	
 	
-	--local fx = EffectData()
-	--fx:SetEntity(self.Weapon)
-	--fx:SetNormal(PlayerAim)
-	--fx:SetAttachment(self.ShellEjectAttachment)
-	--util.Effect(self.ShellEffect,fx)						-- Shell ejection, we're not using this, since most guns have a built in shell eject animation
+	if Silenced then -- Additional muzzle effects
+		util.Effect("rg_muzzle_silenced",fx)
+	else
+		util.Effect(self.MuzzleEffect,fx)
+	end
+	
+	local fx = EffectData()
+	fx:SetEntity(self.Weapon)
+	fx:SetNormal(PlayerAim)
+	fx:SetAttachment(self.ShellEjectAttachment)
+	util.Effect(self.ShellEffect,fx)
 	
 end
 
@@ -651,8 +662,9 @@ function SWEP:RevertFireMode()
 
 end
 
-function SWEP:SetSilenced(Silenced)
+function SWEP:SetSilenced()
 	--if not self.AttachableSilencer then return end
+	print(Silenced)
 	
 	if Silenced then
 		self.Weapon:SendWeaponAnim(ACT_VM_ATTACH_SILENCER)
@@ -677,8 +689,8 @@ function SWEP:PrimaryAttack()
 			Silenced = true
 		end
 		
-	print(Silenced)	
-	self:SetSilenced(Silenced)	
+	self:SetSilenced()
+	self.Weapon:SetNextPrimaryFire(CurTime() + 2)	
 		
 	else
 
@@ -750,6 +762,11 @@ function SWEP:Reload()
 	if FireMode == "Grenade" or self:Clip1() == self.Primary.ClipSize then return end
 	
 	self:SetIronsights(false,self.Owner)
-	self.Weapon:DefaultReload(ACT_VM_RELOAD);
+	
+	if Silenced then
+		self.Weapon:DefaultReload(ACT_VM_RELOAD_SILENCED)	
+	else
+		self.Weapon:DefaultReload(ACT_VM_RELOAD)
+	end
 	
 end
