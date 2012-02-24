@@ -100,7 +100,7 @@
 	"wave"			"weapons/scarl/scarl_boltrelease.wav"
 }
 
-"Weapon_scarl.silencer_off"
+"Weapon_scarl.silencer_on"
 {
 	"channel"		"CHAN_ITEM"
 	"volume"		"1.0"
