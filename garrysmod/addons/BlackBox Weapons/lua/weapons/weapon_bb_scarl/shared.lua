@@ -4,7 +4,6 @@
 if SERVER then
 
 	AddCSLuaFile("shared.lua")
-	SWEP.HoldType = "ar2"
 	
 end
 
@@ -18,8 +17,8 @@ if CLIENT then
 		
 	SWEP.Slot				= 2
 	SWEP.SlotPos			= 1
-	SWEP.WepSelectIcon		= surface.GetTextureID( "VGUI/entities/weapon_bb_scarl_killicon" )
-	killicon.Add("weapon_bb_scarl" ,"VGUI/entities/weapon_bb_scarl_killicon" ,Color(255, 80, 0, 255))
+	SWEP.WepSelectIcon		= surface.GetTextureID( "VGUI/entities/weapon_bb_scarl_icon" )
+	killicon.Add("weapon_bb_scarl" ,"VGUI/entities/weapon_bb_scarl_icon" ,Color(255, 80, 0, 255))
 	
 end
 
@@ -40,6 +39,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Weight				= 3.6
 SWEP.AutoSwitchTo		= false
 SWEP.AutoSwitchFrom		= false
+SWEP.HoldType 			= "ar2"
 
 
 ----------------------

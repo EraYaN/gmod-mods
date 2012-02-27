@@ -5,7 +5,6 @@
 if SERVER then
 
 	AddCSLuaFile("shared.lua")
-	SWEP.HoldType = "ar2"
 	
 end
 
@@ -19,8 +18,8 @@ if CLIENT then
 		
 	SWEP.Slot				= 2
 	SWEP.SlotPos			= 1
-	SWEP.WepSelectIcon		= surface.GetTextureID( "VGUI/entities/weapon_bb_pp2000_killicon" )
-	killicon.Add("weapon_bb_pp2000", "VGUI/entities/weapon_bb_pp2000_killicon", Color(255, 80, 0, 255))
+	SWEP.WepSelectIcon		= surface.GetTextureID( "VGUI/entities/weapon_bb_pp2000_icon" )
+	killicon.Add("weapon_bb_pp2000", "VGUI/entities/weapon_bb_pp2000_icon", Color(255, 80, 0, 255))
 	
 end
 
@@ -41,6 +40,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Weight				= 1.4
 SWEP.AutoSwitchTo		= false
 SWEP.AutoSwitchFrom		= false
+SWEP.HoldType 			= "ar2"
 
 
 ----------------------
@@ -107,6 +107,8 @@ SWEP.ViewModel  			= "models/weapons/v_smg_pp2000.mdl"
 SWEP.WorldModel 			= "models/weapons/w_smg_pp2000.mdl"
 SWEP.MuzzleEffect			= "rg_muzzle_silenced" -- This is an extra muzzleflash effect
 -- Available muzzle effects: rg_muzzle_grenade, rg_muzzle_highcal, rg_muzzle_hmg, rg_muzzle_pistol, rg_muzzle_rifle, rg_muzzle_silenced, none
+
+SWEP.ShellEffect			= "none" -- This is a shell ejection effect
 
 SWEP.MuzzleAttachment		= "1" -- Should be "1" for CSS models or "muzzle" for hl2 models
 SWEP.ShellEjectAttachment	= "2" -- Should be "2" for CSS models or "1" for hl2 models
