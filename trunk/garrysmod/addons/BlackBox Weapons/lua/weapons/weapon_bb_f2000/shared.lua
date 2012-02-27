@@ -4,7 +4,6 @@
 if SERVER then
 
 	AddCSLuaFile("shared.lua")
-	SWEP.HoldType = "ar2"
 	
 end
 
@@ -40,6 +39,7 @@ SWEP.AdminSpawnable		= true
 SWEP.Weight				= 3.6
 SWEP.AutoSwitchTo		= false
 SWEP.AutoSwitchFrom		= false
+SWEP.HoldType 			= "ar2"
 
 
 ----------------------
@@ -107,8 +107,8 @@ SWEP.WorldModel 			= "models/weapons/w_rif_f2000.mdl"
 SWEP.MuzzleEffect			= "rg_muzzle_rifle" -- This is an extra muzzleflash effect
 -- Available muzzle effects: rg_muzzle_grenade, rg_muzzle_highcal, rg_muzzle_hmg, rg_muzzle_pistol, rg_muzzle_rifle, rg_muzzle_silenced, none
 
-SWEP.ShellEffect			= "rg_shelleject_rifle" -- This is a shell ejection effect
--- Available shell eject effects: rg_shelleject, rg_shelleject_rifle, rg_shelleject_shotgun, none
+SWEP.ShellEffect			= "none" -- This is a shell ejection effect
+-- Available shell eject effects: rg_shelleject, rg_shelleject_rifle, rg_shelleject_shotgun, none. Most of our rifles already have shell ejection animations!!!
 
 SWEP.MuzzleAttachment		= "1" -- Should be "1" for CSS models or "muzzle" for hl2 models
 SWEP.ShellEjectAttachment	= "2" -- Should be "2" for CSS models or "1" for hl2 models

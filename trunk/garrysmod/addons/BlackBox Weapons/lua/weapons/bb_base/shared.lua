@@ -25,8 +25,8 @@ SWEP.AdminSpawnable			= false
 SWEP.Primary.Sound			= Sound("Weapon_TMP.Single")
 SWEP.Primary.Damage			= 40
 SWEP.Primary.NumShots		= 1
-SWEP.AutoRPM				= 200
-SWEP.SemiRPM				= 200
+SWEP.AutoRPM				= 0
+SWEP.SemiRPM				= 0
 SWEP.BurstRPM				= 200
 SWEP.MuzzleVelocity 		= 920
 SWEP.AvailableFireModes		= {}
@@ -239,10 +239,15 @@ function SWEP:Initialize()
 
 	if SERVER then
 		-- This is so NPCs know wtf they are doing
-		self:SetWeaponHoldType(self.HoldType)
 		self:SetNPCMinBurst(3)
 		self:SetNPCMaxBurst(6)
-		self:SetNPCFireRate(60/self.AutoRPM)
+		
+		if self.AutoRPM == 0 then
+			self:SetNPCFireRate(60/self.SemiRPM)
+		else
+			self:SetNPCFireRate(60/self.AutoRPM)
+		end
+		
 	end
 	
 	if CLIENT then
@@ -322,6 +327,7 @@ function SWEP:Initialize()
 		self.CurScopeZoom	= 1 -- Another index, this time for ScopeZooms
 	end
 	
+	self:SetWeaponHoldType(self.HoldType)
 	DrawViewModel = true
 	MaxSpeed = 200
 	Silenced = false
@@ -532,7 +538,7 @@ function SWEP:ShootEffects()
 	local PlayerPos = self.Owner:GetShootPos()
 	local PlayerAim = self.Owner:GetAimVector()
 
-	if Silenced then
+	if Silenced and self.AttachableSilencer then
 		self.Weapon:EmitSound(self.Primary.Silenced)
 		self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK_SILENCED)
 	else
@@ -588,16 +594,6 @@ local IRONSIGHT_TIME = 0.25 -- How long it takes to raise our rifle
 function SWEP:SetIronsights(b,player)
 
 if CLIENT or (not player) or player:IsNPC() then return end
-
-	if b then 
-		player:SprintDisable()
-		player:SetMaxSpeed(100)
-		MaxSpeed = 100
-	elseif MaxSpeed != 200 then
-		player:SprintEnable()
-		player:SetMaxSpeed(200)
-		MaxSpeed = 200
-	end
 	
 	-- Send the ironsight state to the client, so it can adjust the player's FOV/Viewmodel pos accordingly
 	self.Weapon:SetNetworkedBool("Ironsights", b)
@@ -615,7 +611,7 @@ end
 
 function SWEP:SetScope(b,player)
 
-if CLIENT or (not player) or player:IsNPC() or FireMode == "Grenade" then return end
+if CLIENT or (not self.Owner) or  (not player) or self.Owner:IsNPC() or (FireMode == "Grenade") then return end
 
 	local PlaySound = b~= self.Weapon:GetNetworkedBool("Scope", not b) -- Only play zoom sounds when chaning in/out of scope mode
 	self.CurScopeZoom = 1 -- Just in case...
@@ -640,13 +636,18 @@ if CLIENT or (not player) or player:IsNPC() or FireMode == "Grenade" then return
 	
 end
 
+function SWEP:AdjustMouseSensitivity()
+
+end
+
 function SWEP:SetFireMode()
+	if self.OwnerIsNPC then return end
 
 	FireMode = self.AvailableFireModes[self.CurFireMode]
 	self.Weapon:SetNetworkedInt("FireMode",self.CurFireMode)
 	
 	-- Set the firemode's fire function (for shooting bullets, grenades, etc.).  This function is called under SWEP:PrimaryAttack()
-	self.FireFunction = self.FireModes[FireMode].FireFunction 
+	self.FireFunction = self.FireModes[self.AvailableFireModes[self.CurFireMode]].FireFunction 
 	
 	-- Run the firemode's init function (for updating delay and other variables)
 	self.FireModes[FireMode].InitFunction(self) 
@@ -654,8 +655,6 @@ function SWEP:SetFireMode()
 end
 
 function SWEP:RevertFireMode()
-
-	local FireMode = self.AvailableFireModes[self.CurFireMode]
 	
 	-- Run the firemode's revert function (for changing back variables that could interfere with other firemodes)
 	self.FireModes[FireMode].RevertFunction(self)
@@ -663,9 +662,10 @@ function SWEP:RevertFireMode()
 end
 
 function SWEP:SetSilenced()
-	--if not self.AttachableSilencer then return end
-	print(Silenced)
+	if not self.OwnerIsNPC or self.AttachableSilencer then return end
 	
+	self:SetIronsights(false,self.Owner)
+		
 	if Silenced then
 		self.Weapon:SendWeaponAnim(ACT_VM_ATTACH_SILENCER)
 	else
@@ -681,20 +681,32 @@ end
 
 function SWEP:PrimaryAttack()
 
-	if self.Owner:KeyDown(IN_USE) then
+	if not self.OwnerIsNPC then
+
+		if self.Owner:KeyDown(IN_USE) then
 	
-		if Silenced then
-			Silenced = false
-		else
-			Silenced = true
-		end
+			if Silenced then
+				Silenced = false
+			else
+				Silenced = true
+			end
 		
-	self:SetSilenced()
-	self.Weapon:SetNextPrimaryFire(CurTime() + 2)	
+		self:SetSilenced()
+		self.Weapon:SetNextPrimaryFire(CurTime() + 2)	
+		
+		else
+		
+			self.Weapon:SetNextSecondaryFire(CurTime() + 0.3)
+			self.Weapon:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
+	
+			-- Fire function is defined under SWEP:SetFireMode()
+			self:FireFunction()
+			
+		end
 		
 	else
 
-		self.Weapon:SetNextSecondaryFire(CurTime() + self.Primary.Delay)
+		self.Weapon:SetNextSecondaryFire(CurTime() + 0.3)
 		self.Weapon:SetNextPrimaryFire(CurTime() + self.Primary.Delay)
 	
 		-- Fire function is defined under SWEP:SetFireMode()
@@ -768,5 +780,7 @@ function SWEP:Reload()
 	else
 		self.Weapon:DefaultReload(ACT_VM_RELOAD)
 	end
+	
+	self.Owner:SetAnimation(PLAYER_RELOAD)
 	
 end
